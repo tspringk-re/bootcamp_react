@@ -2,28 +2,33 @@ import { Form, useActionData } from "react-router-dom";
 import { FormValidationErrors } from "@/types";
 import { useEffect, useState } from "react";
 
-
-export const getItemFromStorage = (key: string): string => {
+export function NewPost(): JSX.Element {
+  const getItemFromStorage = (key: string): string => {
     const value = JSON.parse(localStorage.getItem(key) + "");
     return value;
-}
+  };
 
-export const setItemToStorage = (key: string, value: string): void => {
-  localStorage.setItem(key, JSON.stringify(value));
-}
+  const setItemToStorage = (key: string, value: string): void => {
+    localStorage.setItem(key, JSON.stringify(value));
+  };
 
-export function NewPost(): JSX.Element {
   const actionData = useActionData() as
     | { errors: FormValidationErrors }
     | undefined;
   const [newPostInput, setNewPostInput] = useState("");
 
   useEffect(() => {
-    const value = getItemFromStorage("newPostInput");
-    setNewPostInput(value);
+    try {
+      const value = getItemFromStorage("newPostInput");
+      setNewPostInput(value);
+    } catch (e) {
+      setNewPostInput("");
+    }
   }, [newPostInput]);
 
-  const handleNewPostInput = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
+  const handleNewPostInput = (
+    e: React.ChangeEvent<HTMLTextAreaElement>
+  ): void => {
     const value = e.target.value;
     setNewPostInput(value);
     setItemToStorage("newPostInput", value);

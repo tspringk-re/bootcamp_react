@@ -24,17 +24,22 @@ export function AllPosts(): JSX.Element {
     <>
       <div className="main posts-index">
         <div className="container">
-          <div className="searchForm__container"
-          style={{ margin: "0 auto 20px" }}>
-            <form
-            className="searchForm__form"
-            method="POST">
+          <div
+            className="searchForm__container"
+            style={{ margin: "0 auto 20px" }}
+          >
+            <form className="searchForm__form" method="POST">
               <input
-              type="text"
-              className="searchForm__input"
-              data-test="search-input"
-              onChange={handleSearchInput}
-              style={{ width: "40%", padding: "0.5em", border: "1px solid #999", color: "#555" }}
+                type="text"
+                className="searchForm__input"
+                data-test="search-input"
+                onChange={handleSearchInput}
+                style={{
+                  width: "40%",
+                  padding: "0.5em",
+                  border: "1px solid #999",
+                  color: "#555",
+                }}
               />
             </form>
           </div>
