@@ -1,5 +1,8 @@
 import { FormValidationErrors } from "@/types";
 import { ActionFunction, json, redirect } from "react-router-dom";
+
+import { setItemToStorage } from "../routes/new_post";
+
 export const createPostAction: ActionFunction = async ({
   request,
 }): Promise<Response> => {
@@ -11,6 +14,9 @@ export const createPostAction: ActionFunction = async ({
   });
   if (response.ok) {
     sessionStorage.setItem("dialogMessage", "Post successfully created");
+
+    setItemToStorage("newPostInput", "");
+
     return redirect("/posts");
   }
   if (response.status === 401) {
